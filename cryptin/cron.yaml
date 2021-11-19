@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: default
+  name: cryptin-cron
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cryptin
+            image: microshak/cryptin:latest
+            envFrom:
+            - configMapRef:
+               name: cryptin-config
+            - secretRef:
+               name: database
+            imagePullPolicy: IfNotPresent
+            command: ["python", "coinmarketcap.py"] 
+          restartPolicy: Never
+
