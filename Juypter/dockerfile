@@ -1,4 +1,0 @@
-FROM jupyter/pyspark-notebook
-
-RUN pip install jupyterlab_scheduler
-RUN jupyter labextension install jupyterlab_scheduler
