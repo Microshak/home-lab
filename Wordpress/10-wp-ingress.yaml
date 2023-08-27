@@ -7,12 +7,13 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`wordpress.ff1.dev`)
+    - match: Host(`chrissy.com`)
       kind: Rule
       services:
         - name: demo-wordpress-service
           namespace: demo-wordpress
           port: 80
+   
   tls:
     secretName: wordpress-ff1-dev-tls
 

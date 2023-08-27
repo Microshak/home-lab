@@ -9,6 +9,6 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-    - wordpress.ff1.dev
+    - chrissyroshak.com
 
     

@@ -1,0 +1,18 @@
+ {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+          "creationTimestamp": "2018-11-19T18:48:30Z",
+          "deletionTimestamp": "2018-11-19T18:59:36Z",
+          "name": "<terminating-namespace>",
+          "resourceVersion": "1385077",
+          "selfLink": "/api/v1/namespaces/<terminating-namespace>",
+          "uid": "b50c9ea4-ec2b-11e8-a0be-fa163eeb47a5"
+      },
+      "spec": {
+         "finalizers": 
+      },
+      "status": {
+          "phase": "Terminating"
+      }
+  }
