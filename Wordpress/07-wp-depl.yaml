@@ -23,11 +23,14 @@ spec:
             - containerPort: 80
           resources:
             limits:
-              memory: '1Gi'
-              cpu: '1'
+              memory: '2Gi'
+              cpu: '2'
           volumeMounts:
             - name: wordpress-data
               mountPath: /var/www/html/wp-content
+            - mountPath: /usr/local/etc/php/conf.d/uploads.ini
+              name: php-config
+              subPath: uploads.ini
           env:
             - name: WORDPRESS_DB_HOST
               value: demo-mysql-service:3306
@@ -39,7 +42,14 @@ spec:
             - name: WORDPRESS_DB_USER
               value: root
             - name: WORDPRESS_DB_NAME
-              value: wordpress       
+              value: wordpress
+            - name: WORDPRESS_DEBUG
+              value: "true" 
+            - name: PHP_MEMORY_LIMIT
+              value: 2048M
+            - name: WORDPRESS_CONFIG_EXTRA
+              value: |
+                define('WP_MEMORY_LIMIT', '2048M');
           lifecycle:
             postStart:
               exec:
@@ -48,5 +58,9 @@ spec:
         - name: wordpress-data
           persistentVolumeClaim:
             claimName: demo-wordpress-pvc
+        - configMap:
+            defaultMode: 420
+            name: wp-php-config
+          name: php-config
 
 

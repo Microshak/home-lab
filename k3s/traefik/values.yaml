@@ -10,7 +10,8 @@ additionalArguments:
 
 ports:
   web:
-    redirectTo: websecure
+    port: 80
+ #   redirectTo: websecure
   websecure:
     tls:
       enabled: true

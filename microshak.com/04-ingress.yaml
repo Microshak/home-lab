@@ -1,20 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: demo-wordpress-ingress-secure
-  namespace: demo-wordpress
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
+  name: microshak-ingress
+  namespace: microshak
 spec:
   rules:
-    - host: chrissyroshak.com
+    - host: microshak.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name:  demo-wordpress-service
+                name:  microshak-service
                 port:
                   number: 80
-          

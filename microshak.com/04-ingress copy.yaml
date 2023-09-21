@@ -1,0 +1,30 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`zmicroshak.com`) 
+      kind: Rule
+      services:
+        - name: microshak-service
+          kind: TraefikService
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microshak-ingress
+  namespace: microshak
+spec:
+  rules:
+    - host: microshak.com
+      http:
+        paths:
+          - path: /test
+            pathType: Exact
+            backend:
+              service:
+                name:  microshak-service
+                port:
+                  number: 80

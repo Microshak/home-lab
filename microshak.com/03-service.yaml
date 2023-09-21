@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: microshak-service
+  namespace: microshak
+spec:
+  selector:
+    app: microshak-web
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+#  - name: https
+#    port: 8080
+#    targetPort: https

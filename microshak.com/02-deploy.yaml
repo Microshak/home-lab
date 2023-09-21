@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microshak-web
+  namespace: microshak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      # manage pods with the label app: nginx
+      app: microshak-web
+  template:
+    metadata:
+      labels:
+        app: microshak-web
+    spec:
+      containers:
+      - name: microshak-web-container
+        image: microshak/web
+        ports:
+        - containerPort: 8080
