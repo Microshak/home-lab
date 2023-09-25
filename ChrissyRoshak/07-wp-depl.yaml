@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-wordpress
-  namespace: demo-wordpress
+  name: cr-wordpress
+  namespace: chrissyroshak
   labels:
-    app: demo-wordpress
+    app: cr-wordpress
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-wordpress
+      app: cr-wordpress
   template:
     metadata:
       labels:
-        app: demo-wordpress
+        app: cr-wordpress
     spec:
       containers:
-        - name: demo-wordpress-container
-          image: wordpress:6.1.1
+        - name: cr-wordpress-container
+          image: wordpress:6.3.1
           imagePullPolicy: IfNotPresent          
           ports:
             - containerPort: 80
@@ -39,7 +39,7 @@ spec:
 
           env:
             - name: WORDPRESS_DB_HOST
-              value: demo-mysql-service:3306
+              value: cr-mysql-service:3306
             - name: WORDPRESS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -70,7 +70,7 @@ spec:
       volumes:
         - name: wordpress-data
           persistentVolumeClaim:
-            claimName: demo-wordpress-pvc
+            claimName: cr-pvc
         - configMap:
             defaultMode: 420
             name: wp-php-config

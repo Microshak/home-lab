@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cr-mysql
+  namespace: chrissyroshak
+  labels:
+    app: cr-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cr-mysql
+  template:
+    metadata:
+      labels:
+        app: cr-mysql
+    spec:
+      containers:
+        - name: cr-mysql-container
+          image: mysql:8
+          imagePullPolicy: IfNotPresent      
+          ports:
+            - containerPort: 3306
+          resources:
+            limits:
+              memory: '1Gi'
+              cpu: '1'
+          volumeMounts:
+            - name: cr-mysql-init
+              mountPath: /docker-entrypoint-initdb.d
+            - name: cr-mysql-data
+              mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_DATABASE
+              value: wordpress
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wp-secrets
+                  key: MYSQL_ROOT_PASSWORD                 
+      volumes:
+        - name: cr-mysql-init
+          configMap:
+            name: cr-mysql-wp-config
+        - name: cr-mysql-data    
+          persistentVolumeClaim:
+            claimName: cr-mysql-pvc
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cr-mysql-wp-config
+  namespace: chrissyroshak
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS wordpress;
+
+

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cr-mysql-service
+  namespace: chrissyroshak
+spec:
+  selector:
+    app: cr-mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+
+      
