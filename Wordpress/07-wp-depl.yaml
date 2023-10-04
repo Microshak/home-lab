@@ -23,8 +23,8 @@ spec:
             - containerPort: 80
           resources:
             limits:
-              memory: '2Gi'
-              cpu: '2'
+              memory: '3Gi'
+              cpu: '3'
           volumeMounts:
             - name: wordpress-data
               mountPath: /var/www/html/wp-content
@@ -66,7 +66,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/bash", "-c", "chown -R www-data:www-data /var/www; chmod -R 774 /var/www"]                        
+                command: ["/bin/bash", "-c", "chown -R www-data:www-data /var/www; chmod -R 774 /var/www; chmod 644 .htaccess;","chmod 644 /var/www/html/wp-content/uploads/wpforms/.htaccess;","chmod 644 /var/www/html/wp-content/plugins/akismet/.htaccess;", "chmod 644 var/www/html/wp-content/uploads/wpseo-redirects/.htaccess;", "chmod 644 /usr/src/wordpress/.htaccess;", "chmod -R 755 /var/www/html"]                        
       volumes:
         - name: wordpress-data
           persistentVolumeClaim:
@@ -75,10 +75,10 @@ spec:
             defaultMode: 420
             name: wp-php-config
           name: php-config
-#        - configMap:
-#            defaultMode: 0777
-#            name: wp-htaccess
-#          name: wp-htaccess
+ #       - configMap:
+ #           defaultMode: 0755
+ #           name: wp-htaccess
+ #         name: wp-htaccess
           
 
 
