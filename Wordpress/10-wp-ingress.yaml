@@ -37,4 +37,13 @@ spec:
                 name:  demo-wordpress-service
                 port:
                   number: 80
-          
+    - host: 'blog.chrissyroshak.com'
+      http:
+        paths:
+          - path: "/marketing"
+            pathType: Prefix
+            backend:
+              service:
+                name:  demo-wordpress-service
+                port:
+                  number: 80

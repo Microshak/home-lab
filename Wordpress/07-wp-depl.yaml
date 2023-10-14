@@ -31,9 +31,12 @@ spec:
             - mountPath: /usr/local/etc/php/conf.d/uploads.ini
               name: php-config
               subPath: uploads.ini
-  #          - mountPath: /var/www/html/.htaccess
-  #            name: wp-htaccess
-  #            subPath: .htaccess
+            - mountPath: /var/www/html/.htaccess
+              name: wp-htaccess
+              subPath: .htaccess
+            - mountPath: /var/www/html/wp-config.php
+              name: wp-config
+              subPath: wp-config.php
 
 
 
@@ -56,13 +59,13 @@ spec:
             - name: WORDPRESS_CONFIG_EXTRA
               value: |
                 define('WP_MEMORY_LIMIT', '2048M');
-                #define('WP_ALLOW_MULTISITE', true);
-                #define( 'MULTISITE', true );
-                #define( 'SUBDOMAIN_INSTALL', true );
-                #define( 'DOMAIN_CURRENT_SITE', 'chrissyroshak.com' );
-                #define( 'PATH_CURRENT_SITE', '/' );
-                #define( 'SITE_ID_CURRENT_SITE', 1 );
-                #define( 'BLOG_ID_CURRENT_SITE', 1 );
+                define('WP_ALLOW_MULTISITE', true);
+                define( 'MULTISITE', true );
+                define( 'SUBDOMAIN_INSTALL', true );
+                define( 'DOMAIN_CURRENT_SITE', 'chrissyroshak.com' );
+                define( 'PATH_CURRENT_SITE', '/' );
+                define( 'SITE_ID_CURRENT_SITE', 1 );
+                define( 'BLOG_ID_CURRENT_SITE', 1 );
           lifecycle:
             postStart:
               exec:
@@ -75,10 +78,14 @@ spec:
             defaultMode: 420
             name: wp-php-config
           name: php-config
- #       - configMap:
- #           defaultMode: 0755
- #           name: wp-htaccess
- #         name: wp-htaccess
+        - configMap:
+            defaultMode: 0755
+            name: wp-htaccess
+          name: wp-htaccess
+        - configMap:
+            defaultMode: 0755
+            name: wp-config
+          name: wp-config
           
 
 
