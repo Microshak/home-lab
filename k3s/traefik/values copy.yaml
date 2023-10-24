@@ -6,15 +6,12 @@ rbac:
 
 additionalArguments:
   - "--serversTransport.insecureSkipVerify=true"
-  - "--log.level=DEBUG"
+  - "--log.level=INFO"
 
-deployment:
-  enable: true
-  replicas: 1
-  
 ports:
   web:
-    redirectTo: websecure
+    port: 80
+ #   redirectTo: websecure
   websecure:
     tls:
       enabled: true
