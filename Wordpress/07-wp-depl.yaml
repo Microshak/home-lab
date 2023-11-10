@@ -23,8 +23,8 @@ spec:
             - containerPort: 80
           resources:
             limits:
-              memory: '4Gi'
-              cpu: '4'
+              memory: '5Gi'
+              cpu: '5'
           volumeMounts:
             - name: wordpress-data
               mountPath: /var/www/html/wp-content
@@ -55,10 +55,10 @@ spec:
             - name: WORDPRESS_DEBUG
               value: "true" 
             - name: PHP_MEMORY_LIMIT
-              value: 2048M
+              value: 3048M
             - name: WORDPRESS_CONFIG_EXTRA
               value: |
-                define('WP_MEMORY_LIMIT', '2048M');
+                define('WP_MEMORY_LIMIT', '3048M');
                 define('WP_ALLOW_MULTISITE', true);
                 define( 'MULTISITE', true );
                 define( 'SUBDOMAIN_INSTALL', true );

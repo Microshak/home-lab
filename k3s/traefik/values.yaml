@@ -1,24 +1,31 @@
-dashboard:
- enabled: true
- domain: traefik.microshak.com
-rbac:
- enabled: true
+globalArguments:
+  - "--global.sendanonymoususage=false"
+  - "--global.checknewversion=false"
 
 additionalArguments:
   - "--serversTransport.insecureSkipVerify=true"
-  - "--log.level=DEBUG"
+  - "--log.level=INFO"
 
 deployment:
-  enable: true
-  replicas: 1
-  
+  enabled: true
+  replicas: 3
+  annotations: {}
+  podAnnotations: {}
+  additionalContainers: []
+  initContainers: []
+
 ports:
   web:
-    redirectTo: websecure
+    port: 80
+ #   redirectTo:
+ #     port: websecure
   websecure:
     tls:
       enabled: true
       
+ingressRoute:
+  dashboard:
+    enabled: false
 
 providers:
   kubernetesCRD:
@@ -30,6 +37,7 @@ providers:
     allowExternalNameServices: true
     publishedService:
       enabled: false
+
 rbac:
   enabled: true
 

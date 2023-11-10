@@ -27,8 +27,6 @@ providers:
     allowExternalNameServices: true
     publishedService:
       enabled: false
-rbac:
-  enabled: true
 
 service:
   enabled: true
