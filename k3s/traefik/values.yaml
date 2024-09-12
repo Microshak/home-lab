@@ -1,10 +1,14 @@
 globalArguments:
   - "--global.sendanonymoususage=false"
   - "--global.checknewversion=false"
+  - "--entrypoints.web.address=:80"
+
+  - "--entrypoints.websecure.address=:443"
 
 additionalArguments:
   - "--serversTransport.insecureSkipVerify=true"
   - "--log.level=INFO"
+
 
 deployment:
   enabled: true
@@ -17,11 +21,12 @@ deployment:
 ports:
   web:
     port: 80
- #   redirectTo:
- #     port: websecure
+  #  redirectTo: websecure
+      
   websecure:
+    port: 443
     tls:
-      enabled: true
+      enabled: false
       
 ingressRoute:
   dashboard:

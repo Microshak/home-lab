@@ -31,6 +31,8 @@ spec:
             - mountPath: /usr/local/etc/php/conf.d/uploads.ini
               name: php-config
               subPath: uploads.ini
+            - name: wp-maintenance-mode
+              mountPath: /var/www/html/wp-content/plugins/wp-maintenance-mode
   #          - mountPath: /var/www/html/.htaccess
   #            name: wp-htaccess
   #            subPath: .htaccess
@@ -75,6 +77,11 @@ spec:
             defaultMode: 420
             name: wp-php-config
           name: php-config
+        - name: wp-maintenance-mode
+          hostPath: 
+            path: /home/microshak/Source/lab/ChrissyRoshak/plugins/wp-maintenance-mode
+
+
 #        - configMap:
 #            defaultMode: 0777
 #            name: wp-htaccess

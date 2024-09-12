@@ -1,3 +1,8 @@
+
+
+ChrissyRoshak/migrate/mysql/
+ChrissyRoshak/migrate/
+ChrissyRoshak/plugins/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
